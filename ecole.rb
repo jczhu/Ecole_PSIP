@@ -60,12 +60,12 @@ end
 # here, I sort male first by sorting by length, since length of 
 # "male" < length of "female"
 output << "\nOutput 2:\n"
-#output2 = records.sort_by{|r| [Date.parse(r[4]), r[2].length, r[0]]}
+output2 = records.sort_by{|r| [Date.parse(r[4]), r[2].length, r[0]]}
 # then for each row, join the words with a space and append to file
-#output2.each do |row|
-#	output << row.join(' ')
-#	output << "\n"
-#end
+output2.each do |row|
+	output << row.join(' ')
+	output << "\n"
+end
 
 #-----------------------------------------------------------------------------
 # reverse alphabetical order by last names

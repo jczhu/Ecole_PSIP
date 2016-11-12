@@ -10,6 +10,15 @@ Bouillon Francis Male Blue 03-06-1975
 Smith Steve Male Red 03-03-1985
 
 Output 2:
+Abercrombie Neil Male Tan 13-02-1943
+Kelly Sue Female Pink 12-07-1959
+Bishop Timothy Male Yellow 23-04-1967
+Seles Monica Female Black 02-12-1973
+Bonk Radek Male Green 03-06-1975
+Bouillon Francis Male Blue 03-06-1975
+Kournikova Anna Female Red 03-06-1975
+Hingis Martina Female Green 02-04-1979
+Smith Steve Male Red 03-03-1985
 
 Output 3:
 Smith Steve Male Red 03-03-1985
