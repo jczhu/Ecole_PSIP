@@ -22,6 +22,20 @@ Dir["*delimited.txt"].each do |filename|
 			words.map!{|x| x == "F" ? "Female": x}
 			words.map!{|x| x == "M" ? "Male": x}
 
+			# remove dates, convert to parseable format, append at end
+			# probably not most efficient way since iterating multiple times, 
+			# but what I could find
+			record_date = words.select {|s| s =~ /\d+/}[0]
+			words.reject! {|item| item =~ /[\d]/} 
+			# dealing with the 2 different date formats (another assumption)
+			# that there are only these 2 date formats...
+			if record_date.include? "-"
+				record_date = Date.strptime(record_date, "%m-%d-%Y").strftime("%d-%m-%Y")
+			else
+				record_date = Date.strptime(record_date, "%m/%d/%Y").strftime("%d-%m-%Y")
+			end
+
+			words.push(record_date) # add reformatted date
 			records.push(words)
 		end
 	end
