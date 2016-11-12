@@ -1,1 +1,23 @@
 Output 1:
+Hingis Martina Female 4-2-1979 Green
+Kelly Sue Female Pink 7/12/1959
+Kournikova Anna Female 6-3-1975 Red
+Seles Monica Female 12-2-1973 Black
+Abercrombie Neil Male Tan 2/13/1943
+Bishop Timothy Male Yellow 4/23/1967
+Bonk Radek Male Green 6-3-1975
+Bouillon Francis Male Blue 6-3-1975
+Smith Steve Male Red 3-3-1985
+
+Output 2:
+
+Output 3:
+Smith Steve Male Red 3-3-1985
+Seles Monica Female 12-2-1973 Black
+Kournikova Anna Female 6-3-1975 Red
+Kelly Sue Female Pink 7/12/1959
+Hingis Martina Female 4-2-1979 Green
+Bouillon Francis Male Blue 6-3-1975
+Bonk Radek Male Green 6-3-1975
+Bishop Timothy Male Yellow 4/23/1967
+Abercrombie Neil Male Tan 2/13/1943

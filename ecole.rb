@@ -1,3 +1,5 @@
+require 'Date'
+
 # reading in files and parsing s.t. each record is a new row in the array
 # and each row is further broken down into "words" (last name, first name, 
 # date, etc.)
@@ -19,6 +21,7 @@ Dir["*delimited.txt"].each do |filename|
 			# then convert the remaining single letter (M/F) to Male and Female
 			words.map!{|x| x == "F" ? "Female": x}
 			words.map!{|x| x == "M" ? "Male": x}
+
 			records.push(words)
 		end
 	end
@@ -29,8 +32,35 @@ output = File.open("output.txt", "w")
 
 #-----------------------------------------------------------------------------
 # sorting by female first then male; then within each group, sort by last name 
-output << "Output 1:"
+# here, I sort female first by sorting lexicographically by the 3rd element
+output << "Output 1:\n"
 output1 = records.sort_by{|r| [r[2], r[0]]}
-# then join
+# then for each row, join the words with a space and append to file
+output1.each do |row|
+	output << row.join(' ')
+	output << "\n"
+end
+
+#-----------------------------------------------------------------------------
+# first by date, then male before female, then by last name
+# here, I sort male first by sorting by length, since length of 
+# "male" < length of "female"
+output << "\nOutput 2:\n"
+#output2 = records.sort_by{|r| [Date.parse(r[4]), r[2].length, r[0]]}
+# then for each row, join the words with a space and append to file
+#output2.each do |row|
+#	output << row.join(' ')
+#	output << "\n"
+#end
+
+#-----------------------------------------------------------------------------
+# reverse alphabetical order by last names
+output << "\nOutput 3:\n"
+output3 = records.sort_by{|r| r[0]}.reverse
+# then for each row, join the words with a space and append to file
+output3.each do |row|
+	output << row.join(' ')
+	output << "\n"
+end
 
 output.close
