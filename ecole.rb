@@ -22,26 +22,25 @@ Dir["*delimited.txt"].each do |filename|
 			words.map!{|x| x == "F" ? "Female": x}
 			words.map!{|x| x == "M" ? "Male": x}
 
-			# remove dates, convert to parseable format, append at end
+			# remove date, convert to parseable format, append at end
 			# probably not most efficient way since iterating multiple times, 
-			# but what I could find
+			# but the best way I could think of
 			record_date = words.select {|s| s =~ /\d+/}[0]
 			words.reject! {|item| item =~ /[\d]/} 
-			# dealing with the 2 different date formats (another assumption)
-			# that there are only these 2 date formats...
-			if record_date.include? "-"
-				record_date = Date.strptime(record_date, "%m-%d-%Y").strftime("%d-%m-%Y")
-			else
-				record_date = Date.strptime(record_date, "%m/%d/%Y").strftime("%d-%m-%Y")
-			end
+			# converting dates to same format, then swapping month and day
+			# order so Date class can parse it and compare dates
+			record_date = record_date.gsub('-', '/')
+			parseable_date = Date.strptime(record_date, "%m/%d/%Y").strftime("%d-%m-%Y")
 
-			words.push(record_date) # add reformatted date
+			words.insert(3, record_date) # put slash-separated date in words list
+
+			# also put copy of parseable date for sorting
+			# this is the 6th (index 5) column; will not be part of output
+			words.push(parseable_date) 
 			records.push(words)
 		end
 	end
 end
-
-p records
 output = File.open("output.txt", "w")
 
 #-----------------------------------------------------------------------------
@@ -51,7 +50,7 @@ output << "Output 1:\n"
 output1 = records.sort_by{|r| [r[2], r[0]]}
 # then for each row, join the words with a space and append to file
 output1.each do |row|
-	output << row.join(' ')
+	output << row[0..4].join(' ')
 	output << "\n"
 end
 
@@ -60,10 +59,10 @@ end
 # here, I sort male first by sorting by length, since length of 
 # "male" < length of "female"
 output << "\nOutput 2:\n"
-output2 = records.sort_by{|r| [Date.parse(r[4]), r[2].length, r[0]]}
+output2 = records.sort_by{|r| [Date.parse(r[5]), r[2].length, r[0]]}
 # then for each row, join the words with a space and append to file
 output2.each do |row|
-	output << row.join(' ')
+	output << row[0..4].join(' ')
 	output << "\n"
 end
 
@@ -73,7 +72,7 @@ output << "\nOutput 3:\n"
 output3 = records.sort_by{|r| r[0]}.reverse
 # then for each row, join the words with a space and append to file
 output3.each do |row|
-	output << row.join(' ')
+	output << row[0..4].join(' ')
 	output << "\n"
 end
 
